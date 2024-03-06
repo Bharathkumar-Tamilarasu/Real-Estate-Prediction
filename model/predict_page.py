@@ -4,6 +4,8 @@ import pickle
 import json
 import base64
 import os
+import requests
+
 
 # @st.cache_data
 # def get_img_as_base64(file):
@@ -16,7 +18,7 @@ import os
 #     r"C:\Users\91948\Documents\VS Code Files\RealEstate Valuation System\model\Valuation Pic.png"
 # )
 
-# For Local Checks (Using Relative paths)
+# For Local Checks
 
 # def load_model():
 #     with open(
@@ -25,10 +27,8 @@ import os
 #     ) as f:
 #         return pickle.load(f)
 
-# For Deployment (Using Abosulte path)
+# For Deployment
 
-import requests
-import pickle
 
 def load_model():
     github_raw_url = "https://raw.githubusercontent.com/Bharathkumar-Tamilarasu/RealEstate-Valuation-System/main/model/House%20Price%20Prediction_Pickle.pickle"
@@ -41,7 +41,7 @@ def load_model():
         print(f"Failed to fetch the model file. Status code: {response.status_code}")
         return None
 
-# For Local Checks (Using Relative paths)
+# For Local Checks
 
 # def load_prediction_input():
 #     with open(
@@ -50,19 +50,18 @@ def load_model():
 #     ) as f:
 #         return json.load(f)
 
-# For Deployment (Using Abosulte path)
+# For Deployment
 
 def load_prediction_input():
-    root_directory = os.path.dirname(__file__)
-    file_path = os.path.join(root_directory, "model", "model/prediction_input.json")
+    github_raw_url = "https://raw.githubusercontent.com/Bharathkumar-Tamilarasu/RealEstate-Valuation-System/main/model/prediction_input.json"
 
-    try:
-        with open(file_path, "rb") as f:
-            return json.load(f)
-    except Exception as e:
-        print(f"Error loading model: {e}")
+    response = requests.get(github_raw_url)
+    
+    if response.status_code == 200:
+        return json.loads(response.content)
+    else:
+        print(f"Failed to fetch the prediction input file. Status code: {response.status_code}")
         return None
-
 
 def load_predicted_values(location, bath, bhk, area, all_columns, model):
     column_index = (all_columns).index(location)
@@ -75,12 +74,12 @@ def load_predicted_values(location, bath, bhk, area, all_columns, model):
 
 
 model = load_model()
-# prediction_input = load_prediction_input()
+prediction_input = load_prediction_input()
 
-# all_columns = prediction_input["all_columns"]
-# locations = prediction_input["locations"]
-# bath = prediction_input["bath"]
-# bhk = prediction_input["bhk"]
+all_columns = prediction_input["all_columns"]
+locations = prediction_input["locations"]
+bath = prediction_input["bath"]
+bhk = prediction_input["bhk"]
 
 
 def show_predict_page():
@@ -99,7 +98,10 @@ def show_predict_page():
 
     st.title("RealEstate Valuation System")
     st.write("""### Provide input for the prediction""")
-    st.subheader(f"Model is {model}")
+    st.subheader(f"All Cols output is {all_columns}")
+    st.subheader(f"Locations output is {locations}")
+    st.subheader(f"Bath output is {bath}")
+    st.subheader(f"BHK output is {bhk}")
     # ip_location = st.selectbox("Choose a Location", locations)
     # ip_bath = st.radio("Number of Bathrooms", [i for i in range(1, 6)], horizontal=True)
     # ip_bhk = st.radio("Number of Bedrooms", [i for i in range(1, 6)], horizontal=True)
