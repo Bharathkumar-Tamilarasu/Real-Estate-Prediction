@@ -27,15 +27,18 @@ import os
 
 # For Deployment (Using Abosulte path)
 
-def load_model():
-    root_directory = os.path.dirname(__file__)
-    file_path = os.path.join(root_directory, "model", "House Price Prediction_Pickle.pickle")
+import requests
+import pickle
 
-    try:
-        with open(file_path, "rb") as f:
-            return pickle.load(f)
-    except Exception as e:
-        print(f"Error loading model: {e}")
+def load_model():
+    github_raw_url = "https://raw.githubusercontent.com/Bharathkumar-Tamilarasu/RealEstate-Valuation-System/main/model/House%20Price%20Prediction_Pickle.pickle"
+
+    response = requests.get(github_raw_url)
+    
+    if response.status_code == 200:
+        return pickle.loads(response.content)
+    else:
+        print(f"Failed to fetch the model file. Status code: {response.status_code}")
         return None
 
 # For Local Checks (Using Relative paths)
