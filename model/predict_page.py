@@ -5,16 +5,16 @@ import json
 import base64
 
 
-@st.cache_data
-def get_img_as_base64(file):
-    with open(file, "rb") as f:
-        data = f.read()
-    return base64.b64encode(data).decode()
+# @st.cache_data
+# def get_img_as_base64(file):
+#     with open(file, "rb") as f:
+#         data = f.read()
+#     return base64.b64encode(data).decode()
 
 
-img = get_img_as_base64(
-    r"C:\Users\91948\Documents\VS Code Files\RealEstate Valuation System\model\Valuation Pic.png"
-)
+# img = get_img_as_base64(
+#     r"C:\Users\91948\Documents\VS Code Files\RealEstate Valuation System\model\Valuation Pic.png"
+# )
 
 
 def load_model():
@@ -54,17 +54,17 @@ bhk = prediction_input["bhk"]
 
 def show_predict_page():
 
-    page_bg_img = f"""
-    <style>
-    [data-testid="stAppViewContainer"] > .main {{
-    background-image: url("data:image/png;base64,{img}");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: local;
-    }}
-    """
-    st.markdown(page_bg_img, unsafe_allow_html=True)
+    # page_bg_img = f"""
+    # <style>
+    # [data-testid="stAppViewContainer"] > .main {{
+    # background-image: url("data:image/png;base64,{img}");
+    # background-size: cover;
+    # background-position: center;
+    # background-repeat: no-repeat;
+    # background-attachment: local;
+    # }}
+    # """
+    # st.markdown(page_bg_img, unsafe_allow_html=True)
 
     st.title("RealEstate Valuation System")
     st.write("""### Provide input for the prediction""")
