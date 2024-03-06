@@ -16,6 +16,7 @@ import os
 #     r"C:\Users\91948\Documents\VS Code Files\RealEstate Valuation System\model\Valuation Pic.png"
 # )
 
+# For Local Checks (Using Relative paths)
 
 # def load_model():
 #     with open(
@@ -23,6 +24,8 @@ import os
 #         "rb",
 #     ) as f:
 #         return pickle.load(f)
+
+# For Deployment (Using Abosulte path)
 
 def load_model():
     root_directory = os.path.dirname(__file__)
@@ -34,13 +37,26 @@ def load_model():
     else:
         print(f"File not found: {file_path}")
 
+# For Local Checks (Using Relative paths)
+
+# def load_prediction_input():
+#     with open(
+#         r"C:\Users\91948\Documents\VS Code Files\RealEstate Valuation System\model\prediction_input.json",
+#         "rb",
+#     ) as f:
+#         return json.load(f)
+
+# For Deployment (Using Abosulte path)
 
 def load_prediction_input():
-    with open(
-        r"C:\Users\91948\Documents\VS Code Files\RealEstate Valuation System\model\prediction_input.json",
-        "rb",
-    ) as f:
-        return json.load(f)
+    root_directory = os.path.dirname(__file__)
+    file_path = os.path.join(root_directory, "model", "model/prediction_input.json")
+
+    if os.path.exists(file_path):
+        with open(file_path, 'rb') as file:
+            return pickle.load(f)
+    else:
+        print(f"File not found: {file_path}")
 
 
 def load_predicted_values(location, bath, bhk, area, all_columns, model):
