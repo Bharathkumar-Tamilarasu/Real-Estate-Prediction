@@ -101,13 +101,13 @@ def show_predict_page():
 
     page_bg_img = f"""
     <style>
-    [data-testid="stAppViewContainer"] > .main {{
-    background-image: url("data:image/png;base64,{img}");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: local;
+    .stApp {{
+        background-image: url("data:image/png;base64,{img}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
     }}
+    </style>
     """
     st.markdown(page_bg_img, unsafe_allow_html=True)
 
