@@ -129,7 +129,4 @@ Employed the following libraries for comprehensive data analysis:
 * As the real estate market continues to evolve, this system stands poised to make a meaningful impact by empowering users with accurate and transparent property valuations.
 
 ### **Ready to forecast housing prices? Click [here](https://realestate-valuation-system-fqcq.onrender.com/) to use our RealEstate Valuation System.**
-
-![Valuation Pic 1](https://github.com/Bharathkumar-Tamilarasu/RealEstate-Valuation-System/blob/main/Valuation%20Pic%201.png)
-
 ### **Your time and interest in viewing my project are greatly appreciated. Thank you. 😃!**
