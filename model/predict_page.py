@@ -31,11 +31,12 @@ def load_model():
     root_directory = os.path.dirname(__file__)
     file_path = os.path.join(root_directory, "model", "House Price Prediction_Pickle.pickle")
 
-    if os.path.exists(file_path):
-        with open(file_path, 'rb') as f:
+    try:
+        with open(file_path, "rb") as f:
             return pickle.load(f)
-    else:
-        print(f"File not found: {file_path}")
+    except Exception as e:
+        print(f"Error loading model: {e}")
+        return None
 
 # For Local Checks (Using Relative paths)
 
@@ -52,11 +53,12 @@ def load_prediction_input():
     root_directory = os.path.dirname(__file__)
     file_path = os.path.join(root_directory, "model", "model/prediction_input.json")
 
-    if os.path.exists(file_path):
-        with open(file_path, 'rb') as f:
+    try:
+        with open(file_path, "rb") as f:
             return json.load(f)
-    else:
-        print(f"File not found: {file_path}")
+    except Exception as e:
+        print(f"Error loading model: {e}")
+        return None
 
 
 def load_predicted_values(location, bath, bhk, area, all_columns, model):
