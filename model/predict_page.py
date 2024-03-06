@@ -32,7 +32,7 @@ def load_model():
     file_path = os.path.join(root_directory, "model", "House Price Prediction_Pickle.pickle")
 
     if os.path.exists(file_path):
-        with open(file_path, 'rb') as file:
+        with open(file_path, 'rb') as f:
             return pickle.load(f)
     else:
         print(f"File not found: {file_path}")
@@ -53,8 +53,8 @@ def load_prediction_input():
     file_path = os.path.join(root_directory, "model", "model/prediction_input.json")
 
     if os.path.exists(file_path):
-        with open(file_path, 'rb') as file:
-            return pickle.load(f)
+        with open(file_path, 'rb') as f:
+            return json.load(f)
     else:
         print(f"File not found: {file_path}")
 
