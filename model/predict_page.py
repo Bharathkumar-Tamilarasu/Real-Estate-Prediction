@@ -3,7 +3,7 @@ import numpy as np
 import pickle
 import json
 import base64
-
+import os
 
 # @st.cache_data
 # def get_img_as_base64(file):
@@ -17,12 +17,22 @@ import base64
 # )
 
 
+# def load_model():
+#     with open(
+#         r"C:\Users\91948\Documents\VS Code Files\RealEstate Valuation System\model\House Price Prediction_Pickle.pickle",
+#         "rb",
+#     ) as f:
+#         return pickle.load(f)
+
 def load_model():
-    with open(
-        r"C:\Users\91948\Documents\VS Code Files\RealEstate Valuation System\model\House Price Prediction_Pickle.pickle",
-        "rb",
-    ) as f:
-        return pickle.load(f)
+    root_directory = os.path.dirname(__file__)
+    file_path = os.path.join(root_directory, "model", "House Price Prediction_Pickle.pickle")
+
+    if os.path.exists(file_path):
+        with open(file_path, 'rb') as file:
+            return pickle.load(f)
+    else:
+        print(f"File not found: {file_path}")
 
 
 def load_prediction_input():
