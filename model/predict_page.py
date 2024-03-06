@@ -98,27 +98,24 @@ def show_predict_page():
 
     st.title("RealEstate Valuation System")
     st.write("""### Provide input for the prediction""")
-    st.subheader(f"All Cols output is {all_columns}")
-    st.subheader(f"Locations output is {locations}")
-    st.subheader(f"Bath output is {bath}")
-    st.subheader(f"BHK output is {bhk}")
-    # ip_location = st.selectbox("Choose a Location", locations)
-    # ip_bath = st.radio("Number of Bathrooms", [i for i in range(1, 6)], horizontal=True)
-    # ip_bhk = st.radio("Number of Bedrooms", [i for i in range(1, 6)], horizontal=True)
-    # ip_area = st.number_input("Area (in sqft)", key=int, step=1)
-    # ip_ok = st.button(
-    #     "Estimate",
-    # )
 
-    # if ip_ok and ip_area > 0:
-    #     predicted_value = load_predicted_values(
-    #         ip_location, ip_bath, ip_bhk, ip_area, all_columns, model
-    #     )
-    #     st.subheader(
-    #         f"The property's estimated worth is {int(predicted_value)} lakh rupees."
-    #     )
-    # elif ip_ok and ip_area == 0:
-    #     st.markdown(
-    #         """<p style='color: red;'>Please Enter the Area!!</p>""",
-    #         unsafe_allow_html=True,
-    #     )
+    ip_location = st.selectbox("Choose a Location", locations)
+    ip_bath = st.radio("Number of Bathrooms", [i for i in range(1, 6)], horizontal=True)
+    ip_bhk = st.radio("Number of Bedrooms", [i for i in range(1, 6)], horizontal=True)
+    ip_area = st.number_input("Area (in sqft)", key=int, step=1)
+    ip_ok = st.button(
+        "Estimate",
+    )
+
+    if ip_ok and ip_area > 0:
+        predicted_value = load_predicted_values(
+            ip_location, ip_bath, ip_bhk, ip_area, all_columns, model
+        )
+        st.subheader(
+            f"The property's estimated worth is {int(predicted_value)} lakh rupees."
+        )
+    elif ip_ok and ip_area == 0:
+        st.markdown(
+            """<p style='color: red;'>Please Enter the Area!!</p>""",
+            unsafe_allow_html=True,
+        )
