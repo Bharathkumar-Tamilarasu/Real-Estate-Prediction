@@ -96,7 +96,7 @@ def show_predict_page():
 
     st.title("RealEstate Valuation System")
     st.write("""### Provide input for the prediction""")
-    st.subheader(f"Model is {int(model)}")
+    st.subheader(f"Model is {model}")
     # ip_location = st.selectbox("Choose a Location", locations)
     # ip_bath = st.radio("Number of Bathrooms", [i for i in range(1, 6)], horizontal=True)
     # ip_bhk = st.radio("Number of Bedrooms", [i for i in range(1, 6)], horizontal=True)
