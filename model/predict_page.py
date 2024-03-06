@@ -6,6 +6,7 @@ import base64
 import os
 import requests
 
+# Local Checks
 
 # @st.cache_data
 # def get_img_as_base64(file):
@@ -18,6 +19,21 @@ import requests
 #     r"C:\Users\91948\Documents\VS Code Files\RealEstate Valuation System\model\Valuation Pic.png"
 # )
 
+def get_img_as_base64(file_url):
+    github_raw_url = file_url.replace("github.com", "raw.githubusercontent.com").replace("/blob/", "/")
+
+    response = requests.get(github_raw_url)
+    
+    if response.status_code == 200:
+        data = response.content
+        return base64.b64encode(data).decode()
+    else:
+        print(f"Failed to fetch the image file. Status code: {response.status_code}")
+        return None
+
+img_url = "https://github.com/Bharathkumar-Tamilarasu/RealEstate-Valuation-System/raw/main/model/Valuation%20Pic.png"
+img = get_img_as_base64(img_url)
+
 # For Local Checks
 
 # def load_model():
@@ -28,7 +44,6 @@ import requests
 #         return pickle.load(f)
 
 # For Deployment
-
 
 def load_model():
     github_raw_url = "https://raw.githubusercontent.com/Bharathkumar-Tamilarasu/RealEstate-Valuation-System/main/model/House%20Price%20Prediction_Pickle.pickle"
@@ -84,17 +99,17 @@ bhk = prediction_input["bhk"]
 
 def show_predict_page():
 
-    # page_bg_img = f"""
-    # <style>
-    # [data-testid="stAppViewContainer"] > .main {{
-    # background-image: url("data:image/png;base64,{img}");
-    # background-size: cover;
-    # background-position: center;
-    # background-repeat: no-repeat;
-    # background-attachment: local;
-    # }}
-    # """
-    # st.markdown(page_bg_img, unsafe_allow_html=True)
+    page_bg_img = f"""
+    <style>
+    [data-testid="stAppViewContainer"] > .main {{
+    background-image: url("data:image/png;base64,{img}");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: local;
+    }}
+    """
+    st.markdown(page_bg_img, unsafe_allow_html=True)
 
     st.title("RealEstate Valuation System")
     st.write("""### Provide input for the prediction""")
