@@ -99,17 +99,17 @@ bhk = prediction_input["bhk"]
 
 def show_predict_page():
 
-    page_bg_img = f"""
-    <style>
-    [data-testid="stAppViewContainer"] > .main {{
-    background-image: url("data:image/png;base64,{img}");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: local;
-    }}
-    """
-    st.markdown(page_bg_img, unsafe_allow_html=True)
+    # page_bg_img = f"""
+    # <style>
+    # [data-testid="stAppViewContainer"] > .main {{
+    # background-image: url("data:image/png;base64,{img}");
+    # background-size: cover;
+    # background-position: center;
+    # background-repeat: no-repeat;
+    # background-attachment: local;
+    # }}
+    # """
+    # st.markdown(page_bg_img, unsafe_allow_html=True)
 
     st.title("RealEstate Valuation System")
     st.write("""### Provide input for the prediction""")
@@ -134,3 +134,5 @@ def show_predict_page():
             """<p style='color: red;'>Please Enter the Area!!</p>""",
             unsafe_allow_html=True,
         )
+    image_url = "https://raw.githubusercontent.com/Bharathkumar-Tamilarasu/RealEstate-Valuation-System/main/model/Valuation%20Pic.png"
+    st.image(image_url, caption="Your Image Caption", use_column_width=True)
