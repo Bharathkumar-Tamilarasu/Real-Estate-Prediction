@@ -113,14 +113,14 @@ def show_predict_page():
     # """
     # st.markdown(page_bg_img, unsafe_allow_html=True)
 
-    st.title("RealEstate Valuation System")
+    st.title("RealEstate Valuation System 🏘")
     st.image(image_url)
-    st.write("""### Provide input for the prediction""")
+    st.markdown("""##### Provide input for the prediction""")
 
-    ip_location = st.selectbox("Choose a Location", locations)
-    ip_bath = st.radio("Number of Bathrooms", [i for i in range(1, 6)], horizontal=True)
-    ip_bhk = st.radio("Number of Bedrooms", [i for i in range(1, 6)], horizontal=True)
-    ip_area = st.number_input("Area (in sqft)", key=int, step=1)
+    ip_location = st.selectbox("""#### 🌍 Choose a Location""", locations)
+    ip_bath = st.radio("""#### 🛁 Number of Bathrooms""", [i for i in range(1, 6)], horizontal=True)
+    ip_bhk = st.radio("""#### 🛏️ Number of Bedrooms""", [i for i in range(1, 6)], horizontal=True)
+    ip_area = st.number_input("""#### 📐 Area Size (in sqft)""", key=int, step=1)
     ip_ok = st.button(
         "Estimate",
     )
@@ -136,3 +136,4 @@ def show_predict_page():
         st.error(
             "Please Enter the Area!"
         )
+
