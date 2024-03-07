@@ -19,20 +19,20 @@ import requests
 #     r"C:\Users\91948\Documents\VS Code Files\RealEstate Valuation System\model\Valuation Pic.png"
 # )
 
-def get_img_as_base64(file_url):
-    github_raw_url = file_url.replace("github.com", "raw.githubusercontent.com").replace("/blob/", "/")
+# def get_img_as_base64(file_url):
+#     github_raw_url = file_url.replace("github.com", "raw.githubusercontent.com").replace("/blob/", "/")
 
-    response = requests.get(github_raw_url)
+#     response = requests.get(github_raw_url)
     
-    if response.status_code == 200:
-        data = response.content
-        return base64.b64encode(data).decode()
-    else:
-        print(f"Failed to fetch the image file. Status code: {response.status_code}")
-        return None
+#     if response.status_code == 200:
+#         data = response.content
+#         return base64.b64encode(data).decode()
+#     else:
+#         print(f"Failed to fetch the image file. Status code: {response.status_code}")
+#         return None
 
-img_url = "https://github.com/Bharathkumar-Tamilarasu/RealEstate-Valuation-System/raw/main/model/Valuation%20Pic.png"
-img = get_img_as_base64(img_url)
+# img_url = "https://github.com/Bharathkumar-Tamilarasu/RealEstate-Valuation-System/raw/main/model/Valuation%20Pic.png"
+# img = get_img_as_base64(img_url)
 
 # For Local Checks
 
@@ -96,13 +96,15 @@ locations = prediction_input["locations"]
 bath = prediction_input["bath"]
 bhk = prediction_input["bhk"]
 
+image_url = "https://raw.githubusercontent.com/Bharathkumar-Tamilarasu/RealEstate-Valuation-System/main/Valuation%20Pic%201.png"
+
 
 def show_predict_page():
 
     # page_bg_img = f"""
     # <style>
     # [data-testid="stAppViewContainer"] > .main {{
-    # background-image: url("data:image/png;base64,{img}");
+    # background-image: url("data:image/png;base64,{image_url}");
     # background-size: cover;
     # background-position: center;
     # background-repeat: no-repeat;
@@ -112,6 +114,7 @@ def show_predict_page():
     # st.markdown(page_bg_img, unsafe_allow_html=True)
 
     st.title("RealEstate Valuation System")
+    st.image(image_url)
     st.write("""### Provide input for the prediction""")
 
     ip_location = st.selectbox("Choose a Location", locations)
@@ -126,13 +129,10 @@ def show_predict_page():
         predicted_value = load_predicted_values(
             ip_location, ip_bath, ip_bhk, ip_area, all_columns, model
         )
-        st.subheader(
+        st.success(
             f"The property's estimated worth is {int(predicted_value)} lakh rupees."
         )
     elif ip_ok and ip_area == 0:
-        st.markdown(
-            """<p style='color: red;'>Please Enter the Area!!</p>""",
-            unsafe_allow_html=True,
+        st.error(
+            "Please Enter the Area!"
         )
-    image_url = "https://raw.githubusercontent.com/Bharathkumar-Tamilarasu/RealEstate-Valuation-System/main/model/Valuation%20Pic.png"
-    st.image(image_url, caption="Your Image Caption", use_column_width=True)
