@@ -104,7 +104,7 @@ def show_predict_page():
     # page_bg_img = f"""
     # <style>
     # [data-testid="stAppViewContainer"] > .main {{
-    # background-image: url("data:image/png;base64,{image_url}");
+    # background-image: url("data:image/png;base64,{img}");
     # background-size: cover;
     # background-position: center;
     # background-repeat: no-repeat;
@@ -113,13 +113,15 @@ def show_predict_page():
     # """
     # st.markdown(page_bg_img, unsafe_allow_html=True)
 
-    st.title("RealEstate Valuation System 🏘")
     st.image(image_url)
-    st.markdown("""##### Provide input for the prediction""")
 
     ip_location = st.selectbox("""#### 🌍 Choose a Location""", locations)
-    ip_bath = st.radio("""#### 🛁 Number of Bathrooms""", [i for i in range(1, 6)], horizontal=True)
-    ip_bhk = st.radio("""#### 🛏️ Number of Bedrooms""", [i for i in range(1, 6)], horizontal=True)
+    ip_bath = st.radio(
+        """#### 🛁 Number of Bathrooms""", [i for i in range(1, 6)], horizontal=True
+    )
+    ip_bhk = st.radio(
+        """#### 🛏️ Number of Bedrooms""", [i for i in range(1, 6)], horizontal=True
+    )
     ip_area = st.number_input("""#### 📐 Area Size (in sqft)""", key=int, step=1)
     ip_ok = st.button(
         "Estimate",
@@ -133,7 +135,4 @@ def show_predict_page():
             f"The property's estimated worth is {int(predicted_value)} lakh rupees."
         )
     elif ip_ok and ip_area == 0:
-        st.error(
-            "Please Enter the Area!"
-        )
-
+        st.error("Please Enter the Area!")
